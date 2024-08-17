@@ -1,0 +1,63 @@
+# Node modules
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Compiled output
+dist/
+build/
+
+# Environment files
+.env
+.env.*
+
+# IDE/Editor specific
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# OS-specific files
+*.swp
+*.swo
+
+# Miscellaneous
+*.tmp
+*.bak
+*.swp
+*.swo
+*.orig
+
+# Dependency directories
+jspm_packages/
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# Next.js build output
+.next/
+
+# Gatsby files
+.cache/
+public/
+
+# Nuxt.js
+.nuxt/
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Parcel cache
+.cache/
+
+# SvelteKit
+.svelte-kit/

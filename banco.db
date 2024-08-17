@@ -1,0 +1,68 @@
+create schema Music;
+USE Music;
+
+SHOW TABLES;
+
+SELECT * FROM playback_history;
+SELECT * FROM playlist_items;
+SELECT * FROM playlists;
+SELECT * FROM songs;
+SELECT * FROM users;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    spotify_id VARCHAR(255) UNIQUE NOT NULL,
+    display_name VARCHAR(255),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    access_token TEXT NOT NULL,
+    refresh_token TEXT,
+    profile_image TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE songs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    spotify_id VARCHAR(255) UNIQUE NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    artist VARCHAR(255) NOT NULL,
+    album VARCHAR(255) NOT NULL,
+    duration_ms INT NOT NULL,
+    preview_url TEXT,
+    album_cover_url TEXT,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE playlists (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    cover_image TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE playlist_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    playlist_id INT,
+    song_id INT,
+    track_number INT,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (playlist_id) REFERENCES playlists(id) ON DELETE CASCADE,
+    FOREIGN KEY (song_id) REFERENCES songs(id) ON DELETE CASCADE
+);
+
+CREATE TABLE playback_history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    song_id INT,
+    played_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (song_id) REFERENCES songs(id) ON DELETE CASCADE
+);
+
+
+
